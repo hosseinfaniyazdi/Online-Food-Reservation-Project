@@ -1,0 +1,106 @@
+﻿@page
+@model cmsyasix.web.Pages.Admin.Foods.CreateFoodModel
+@{
+    ViewData["Title"] = "افزودن غذای جدید";
+}
+
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-md-8">
+            <h2>اطلاعات دوره</h2>
+            <hr />
+            <div class="form-group">
+                <label>عنوان محصول</label>
+                <input type="text" asp-for="Food.FoodTitle" class="form-control">
+                <span asp-validation-for="Food.FoodTitle"></span>
+            </div>
+            <div class="form-group">
+                <label>گروه اصلی</label>
+                <select class="form-control" asp-for="Food.GroupId" asp-items="@(ViewData["Groups"] as SelectList)"></select>
+                <span asp-validation-for="Food.GroupId"></span>
+            </div>
+            <div class="form-group">
+                <label>گروه فرعی</label>
+                <select class="form-control" asp-for="Food.SubGroup" asp-items="@(ViewData["SubGroups"] as SelectList)"></select>
+                <span asp-validation-for="Food.SubGroup"></span>
+            </div>
+            <div class="form-group">
+                <label>نام افزوننده محصول</label>
+                <select class="form-control" asp-for="Food.UserId" asp-items="@(ViewData["Users"] as SelectList)"></select>
+                <span asp-validation-for="Food.UserId"></span>
+            </div>
+            <div class="form-group">
+                <label>توضیحات محصول</label>
+                <textarea class="form-control" asp-for="Food.FoodDescription" rows="10"></textarea>
+                <span asp-validation-for="Food.FoodDescription"></span>
+            </div>
+            <div class="form-group">
+                <label>قیمت محصول</label>
+                <input type="number" asp-for="Food.FoodPrice" value="0" class="form-control" />
+                <span asp-validation-for="Food.FoodPrice"></span>
+            </div>
+            <div class="form-group">
+                <label>کلمات کلیدی محصول</label>
+                <input type="text" asp-for="Food.Tags" class="form-control">
+                <p class="help-block">کلمات را با - جدا کنید</p>
+                <span asp-validation-for="Food.FoodTitle"></span>
+            </div>
+            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+        </div>
+        <div class="col-md-4">
+            <p></p>
+            <img id="imgFood" class="thumbnail" src="/UserAvatar/Defult.jpg" />
+            <div class="form-group">
+
+                <label>انتخاب تصویر</label>
+                <input type="file" name="imgFoodUp" id="imgFoodUp">
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script>
+        $("#Food_GroupId").change(function () {
+            $("#Food_SubGroup").empty();
+            $.getJSON("/home/GetSubGroups/" + $("#Food_GroupId :selected").val(),
+                function (data) {
+
+                    $.each(data,
+                        function () {
+                            $("#Food_SubGroup").append('<option value=' + this.value + '>' + this.text + '</option>');
+
+                        });
+
+                });
+
+
+        });
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgFood').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgFoodUp").change(function () {
+            readURL(this);
+        });
+    </script>
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace('Food_FoodDescription', {
+            customConfig: '/js/Config.js'
+        });
+
+    </script>
+}

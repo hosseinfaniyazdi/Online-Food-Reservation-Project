@@ -1,0 +1,185 @@
+﻿@using cmsyasix.Core.Services.Interfaces
+@model cmsyasix.Data.Entities.Order.Order
+
+@inject IUserService _UserService
+
+@{
+    ViewData["Title"] = "ShowOrder";
+    int sumOrder = Model.OrderSum;
+    string discounttype = ViewBag.DiscountType.ToString();
+    int userid = _UserService.GetUserIdByUserName(User.Identity.Name);
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">رستوران فارفالا</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> نمایش فاکتور </li>
+        </ul>
+    </nav>
+</div>
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <partial name="_SideBar" />
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> فاکتور شما </h1></header>
+                        @if (ViewBag.finaly == true)
+                        {
+                            <div class="alert alert-success">
+                                فاکتور با موفقیت پرداخت گردید
+                            </div>
+                        }
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>محصول</th>
+                                    <th>تعداد</th>
+                                    <th>قیمت</th>
+                                    <th>جمع</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderDetails)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="/ShowFood/@item.Food.FoodId" target="_blank">@item.Food.FoodTitle</a>
+                                        </td>
+                                        <td>
+                                            @item.Count
+                                        </td>
+                                        <td>@item.Price</td>
+                                        <td>
+                                            @((item.Count * item.Price).ToString("#,0"))
+                                        </td>
+                                        @if (!Model.IsFinaly)
+                                        {
+                                            <td>
+                                                <a class="btn btn-sm btn-success" href="/UserPanel/MyOrders/Command/@item.DetailId?command=up">افزایش</a>
+                                                <a class="btn btn-sm btn-warning" href="/UserPanel/MyOrders/Command/@item.DetailId?command=down">کاهش</a>
+                                                <a class="btn btn-sm btn-danger" href="/UserPanel/MyOrders/Delete/@item.DetailId">
+                                                    حذف
+                                                </a>
+                                            </td>
+                                        }
+
+                                    </tr>
+                                }
+                                @if (!Model.IsFinaly)
+                                {
+                                    <tr>
+                                        <td colspan="3" class="text-left">کد تخفیف</td>
+                                        <td>
+                                            <form action="/UserPanel/MyOrders/UseDiscount" method="post">
+                                                <input type="hidden" name="orderid" value="@Model.OrderId" />
+                                                <input type="text" name="code" class="form-control" />
+                                                <input type="submit" class="btn btn-primary btn-block" style="margin-top: 5px" value="اعمال" />
+                                            </form>
+                                            @if (discounttype != null)
+                                            {
+                                                switch (discounttype)
+                                                {
+                                                    case "Success":
+                                                        {
+                                                            <div class="alert alert-success">
+                                                                <p class="text-muted">کد با موفقیت اعمال شد</p>
+                                                            </div>
+                                                            break;
+                                                        }
+                                                    case "ExpierDate":
+                                                        {
+                                                            <div class="alert alert-danger">
+                                                                <p class="text-muted">تاریخ کد به اتمام رسیده است</p>
+                                                            </div>
+                                                            break;
+                                                        }
+                                                    case "NotFound":
+                                                        {
+                                                            <div class="alert alert-warning">
+                                                                <p class="text-muted">کد معتبر نیست</p>
+                                                            </div>
+                                                            break;
+                                                        }
+                                                    case "Finished":
+                                                        {
+                                                            <div class="alert alert-danger">
+                                                                <p class="text-muted">کد به اتمام رسیده است</p>
+                                                            </div>
+                                                            break;
+                                                        }
+                                                    case "Used":
+                                                        {
+                                                            <div class="alert alert-info">
+                                                                <p class="text-muted">این کد قبلا توسط شما استفاده شده است</p>
+                                                            </div>
+                                                            break;
+                                                        }
+                                                }
+
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="3" class="text-left">جمع کل</td>
+                                    <td>
+                                        @sumOrder
+                                    </td>
+                                </tr>
+                                @if (!Model.IsFinaly)
+                                {
+                                    <tr>
+                                        <td colspan="2" class="text-left"></td>
+                                        <td colspan="2">
+                                            @if (_UserService.BalanceUserWallet(User.Identity.Name) >= sumOrder)
+                                            {
+                                                <a class="btn btn-success btn-block" href="/UserPanel/MyOrders/FinalyOrder/@Model.OrderId">تایید فاکتور</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-success btn-block" disabled>تایید فاکتور</a>
+                                                <div class="alert alert-danger">
+                                                    موجودی کیف پول شما کافی نمی باشد ، لطفا از طریق این
+                                                    <a href="/UserPanel/Wallet" class="alert-link">لینک</a>
+                                                    اقدام به شارژ حساب کنید
+                                                </div>
+                                            }
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        @*@if (ViewBag.finaly == true)
+                        {*@
+                            <form action="/UserPanel/MyOrders/SendPd" method="post">
+                                <input type="hidden" name="sendProduct.OrderId" id="sendProduct.OrderId" value="@Model.OrderId" />
+                                <input type="hidden" name="sendProduct.UserId" id="sendProduct.UserId" value="@userid" />
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        @*<label for="نام کاربری"></label>*@
+                                        <input type="text" class="form-control" name="sendProduct.userNm" placeholder="نام و نام خانوادگی" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="text" class="form-control" name="sendProduct.PhoneNumber" placeholder="شماره تماس" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @*<label for="آدرس"></label>*@
+                                    <input type="text" class="form-control" name="sendProduct.Address" placeholder="آدرس" />
+                                </div>
+                                <button class="btn btn-primary">ثبت اطلاعات</button>
+                            </form>
+
+                        @*}*@
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

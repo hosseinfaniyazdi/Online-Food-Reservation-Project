@@ -1,0 +1,59 @@
+﻿@model IEnumerable<cmsyasix.Core.DTOs.ShowFoodListViewModel>
+@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+@section SearchBox{
+    <header>
+        <a href="" class="logo"><img src="/images/Untitled-1.png"></a>
+        <h1 style="display:none;"> با اساتید مجرب و کارآزموده در خودآموز تاپ لرن </h1>
+        <h2 style="display:none;"> آموزش ببینید ، تجربه کسب کنید و بازار کار شوید </h2>
+        <h3 style="display:none;"> با کمترین هزینه خودت یاد بگیر </h3>
+    </header>
+    <div class="search-form">
+        <form action="/Food" method="get">
+            <input type="text" name="filter" placeholder="چی دوست داری یاد بگیری ؟">
+            <button><i class="zmdi zmdi-search"></i></button>
+        </form>
+    </div>
+}
+
+<main id="home-page">
+    <div class="container">
+        <section class="terms-items">
+            <header>
+                <h2> آخرین محصولات رستوران فارفالا </h2>
+                <a href=""> مشاهده همه محصولات </a>
+            </header>
+            <div class="row">
+                <!-- col -->
+                @foreach (var item in Model)
+                {
+                    <partial name="_ProductFood" model="@item"></partial>
+                }
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="terms-items">
+            <header>
+                <h2> محصولات محبوب رستوران فارفالا </h2>
+                <a href=""> مشاهده همه محصولات </a>
+            </header>
+            <div class="row">
+                @{
+                    List<cmsyasix.Core.DTOs.ShowFoodListViewModel> popularfood = ViewBag.FoodPopular as List<cmsyasix.Core.DTOs.ShowFoodListViewModel>;
+                }
+                @if (popularfood != null)
+                {
+                    foreach (var item in popularfood)
+                    {
+                        <partial name="_ProductFood" model="@item" />
+                    }
+                }
+                <!-- col -->
+            </div>
+        </section>
+    </div>
+</main>
+

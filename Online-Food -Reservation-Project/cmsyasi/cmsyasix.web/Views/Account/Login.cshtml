@@ -1,0 +1,131 @@
+﻿@model cmsyasix.Core.DTOs.LoginViewModel
+@{
+    ViewData["Title"] = "ورود به سایت";
+}
+
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">رستوران فارفالا</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ورود به سایت</li>
+    </ul>
+</nav>
+<main class="client-page">
+    <div class="container-content">
+        @if (ViewBag.IsSuccess != null)
+        {
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+            <script>
+                setTimeout(function () {
+                    swal({
+                        title: "ورود با موفقیت انجام شد",
+                        type: "success",
+                        confirmButtonText: "OK"
+                    },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                window.location.href = "https://localhost:44384/UserPanel";
+                            }
+                        });
+                });
+                                        //swal({
+                                        //    title: "Good job!",
+                                        //    text: "You clicked the button!",
+                                        //    icon: "success",
+                                        //    button: "Aww yiss!",
+                                        //});
+                                        //window.location = "https://localhost:44384/";
+                                                                //swal("Good job!", "Your order has been confirmed with success :)", "success");
+
+                                                                //setTimeout(function () {
+                                                                //    swal({
+                                                                //        title: "Wow!",
+                                                                //        text: "ورود با موفقیت انجام شد",
+                                                                //        type: "success"
+                                                                //    }, function () {
+                                                                //        window.location.href = "https://localhost:44384/";
+                                                                //    });
+                                                                //}, 3000);
+                                                                //swal({
+                                                                //    title: 'Signed Up!',
+                                                                //    html: 'Thank you for registering',
+                                                                //    type: 'success',
+                                                                //    confirmButtonText: 'Got it!'
+                                                                //}, function () {
+                                                                //    window.location.href = "/Home/Index";
+                                                                //});
+
+                                                                //swal({
+                                                                //    title: "Good job!",
+                                                                //    text: "You clicked the button!",
+                                                                //    icon: "success",
+                                                                //    button: "Aww yiss!",
+                                                                //});
+
+
+
+                                                                                                                    //------------------------------
+                                                                                                                    //$(document).ready(function () {
+                                                                                                                    //    swal({
+                                                                                                                    //        title: "Wow!",
+                                                                                                                    //        text: "ورود با موفقیت انجام شد",
+                                                                                                                    //        type: "success"
+                                                                                                                    //    },
+                                                                                                                    //        function () {
+                                                                                                                    //            window.location = "https://localhost:44384/";
+                                                                                                                    //        });
+
+            </script>
+
+
+            @*<div class="alert alert-success">
+                <p class="help-block">ورود با موفقیت انجام شد</p>
+            </div>
+
+            <script>
+                // Your delay in milliseconds
+                var delay = 3000;
+                setTimeout(function () { window.location = "https://localhost:44384/"; }, delay);
+            </script>*@
+        }
+        @if (ViewBag.EditProfile == true)
+        {
+            <div class="alert alert-warning">
+                بدلیل ویرایش پروفایل و بارگزاری مجدد اطلاعات لطفا مجدد لاگین کنید
+            </div>
+        }
+        <header><h2> ورود به سایت </h2></header>
+
+        <div class="form-layer">
+
+            <form asp-action="Login" method="post">
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
+                    <input asp-for="Email" type="text" class="form-control" placeholder="ایمیل" aria-describedby="email-address">
+
+                </div>
+                <span asp-validation-for="Email"></span>
+                <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور " aria-describedby="password">
+
+                </div>
+                <span asp-validation-for="Password"></span>
+                <div class="remember-me">
+                    <label><input asp-for="RememberMe" type="checkbox" name="">  مرا بخاطر بسپار </label>
+                </div>
+
+                <div class="link">
+                    <a href="/ForgotPassword"> <i class="zmdi zmdi-lock"></i> رمز عبور خود را فراموش کرده ام !</a>
+                    <a href="/Register"> <i class="zmdi zmdi-account"></i> عضویت در سایت </a>
+                </div>
+
+                <button class="btn btn-success"> ورود به سایت </button>
+
+            </form>
+        </div>
+
+    </div>
+</main>

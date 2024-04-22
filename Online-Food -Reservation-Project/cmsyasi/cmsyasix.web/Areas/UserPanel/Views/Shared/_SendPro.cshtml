@@ -1,0 +1,15 @@
+﻿@model cmsyasix.Data.Entities.Food.SendProduct
+@{ 
+    Layout = "_DefaultLayout";
+}
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">رستوران فارفالا</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ارسال کالا</li>
+    </ul>
+</nav>
+
+<div class="alert alert-success">
+    <h2>@Model.userNm عزیز !</h2>
+    <p> غذای شما در حال آماده سازی است و پس از آن غذا به نشانی @Model.Address ارسال میشود.</p>
+</div>

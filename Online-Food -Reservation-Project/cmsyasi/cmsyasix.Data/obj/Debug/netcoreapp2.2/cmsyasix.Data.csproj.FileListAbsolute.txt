@@ -1,0 +1,9 @@
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\bin\Debug\netcoreapp2.2\cmsyasix.Data.deps.json
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\bin\Debug\netcoreapp2.2\cmsyasix.Data.dll
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\obj\Debug\netcoreapp2.2\cmsyasix.Data.csproj.CoreCompileInputs.cache
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\obj\Debug\netcoreapp2.2\cmsyasix.Data.AssemblyInfoInputs.cache
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\obj\Debug\netcoreapp2.2\cmsyasix.Data.AssemblyInfo.cs
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\bin\Debug\netcoreapp2.2\cmsyasix.Data.pdb
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\obj\Debug\netcoreapp2.2\cmsyasix.Data.dll
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\obj\Debug\netcoreapp2.2\cmsyasix.Data.pdb
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Data\obj\Debug\netcoreapp2.2\cmsyasix.Data.csprojAssemblyReference.cache

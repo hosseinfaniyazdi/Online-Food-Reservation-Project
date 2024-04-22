@@ -1,0 +1,12 @@
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\bin\Debug\netcoreapp2.2\cmsyasix.Core.deps.json
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\bin\Debug\netcoreapp2.2\cmsyasix.Core.dll
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\bin\Debug\netcoreapp2.2\cmsyasix.Core.pdb
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\obj\Debug\netcoreapp2.2\cmsyasix.Core.csprojAssemblyReference.cache
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\obj\Debug\netcoreapp2.2\cmsyasix.Core.csproj.CoreCompileInputs.cache
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\obj\Debug\netcoreapp2.2\cmsyasix.Core.AssemblyInfoInputs.cache
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\obj\Debug\netcoreapp2.2\cmsyasix.Core.AssemblyInfo.cs
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\obj\Debug\netcoreapp2.2\cmsyasix.Core.dll
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\obj\Debug\netcoreapp2.2\cmsyasix.Core.pdb
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\bin\Debug\netcoreapp2.2\cmsyasix.Data.dll
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\bin\Debug\netcoreapp2.2\cmsyasix.Data.pdb
+C:\Users\hossein\source\repos\cmsyasix\cmsyasix.Core\obj\Debug\netcoreapp2.2\cmsyasix.Core.csproj.CopyComplete
